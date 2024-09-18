@@ -16,9 +16,13 @@ export interface Expense {
 }
 
 function App() {
-  const [expenses] = useState<Expense[]>(initialExpenses);
+  const [expenses, setExpenses] = useState<Expense[]>(initialExpenses);
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible();
+
+  const deleteExpense = (id: number) => {
+    setExpenses(expenses.filter((expense) => expense.id !== id));
+  };
 
   return (
     <div className="bg-gray-50 min-h-screen	w-full p-5">
@@ -27,7 +31,10 @@ function App() {
         setIsComponentVisible={setIsComponentVisible}
       />
       <SummarySection expenses={expenses} />
-      <MainSection expenses={expenses} />
+      <MainSection
+        expenses={expenses}
+        deleteExpense={(id) => deleteExpense(id)}
+      />
       {isComponentVisible && (
         <div ref={ref}>
           <Form

@@ -7,9 +7,10 @@ ChartJS.register(ArcElement, Legend, Tooltip);
 
 interface Props {
   expenses: Expense[];
+  deleteExpense: (id: number) => void;
 }
 
-const MainSection = ({ expenses }: Props) => {
+const MainSection = ({ expenses, deleteExpense }: Props) => {
   const total = useCalculateTotal(expenses);
   return (
     <>
@@ -39,11 +40,16 @@ const MainSection = ({ expenses }: Props) => {
                 className="p-2 border-b-2 border-gray-300 grid grid-cols-6 gap-2"
               >
                 <p className="col-span-2 break-words">{expense.title}</p>
-                <p>{expense.category}</p>
-                <p>{expense.dateAdded}</p>
-                <p>{expense.amount}</p>
+                <p className="flex items-center">{expense.category}</p>
+                <p className="flex items-center">{expense.dateAdded}</p>
+                <p className="flex items-center">{expense.amount}</p>
                 <div>
-                  <button>DELETE</button>
+                  <button
+                    onClick={() => deleteExpense(expense.id)}
+                    className="bg-red-600 text-white px-2 py-1 rounded-sm"
+                  >
+                    DELETE
+                  </button>
                 </div>
               </div>
             ))}
