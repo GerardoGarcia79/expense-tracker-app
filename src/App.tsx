@@ -3,10 +3,11 @@ import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
 import allData from "./data/allExpensesData";
 import { useState } from "react";
+import Form from "./components/Form";
 ChartJS.register(ArcElement, Legend, Tooltip);
 
 function App() {
-  const [expenses, setExpenses] = useState([
+  const [expenses] = useState([
     {
       id: 1,
       title: "Videogames",
@@ -75,6 +76,7 @@ function App() {
           <Doughnut data={allData} options={{}} className="" />
         </div>
       </div>
+      <Form />
     </div>
   );
 }
