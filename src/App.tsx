@@ -5,6 +5,7 @@ import useComponentVisible from "./hooks/useComponentVisible";
 import HeaderSection from "./components/HeaderSection";
 import SummarySection from "./components/SummarySection";
 import MainSection from "./components/MainSection";
+import { initialExpenses } from "./data/allExpensesData";
 
 export interface Expense {
   id: number;
@@ -15,15 +16,7 @@ export interface Expense {
 }
 
 function App() {
-  const [expenses] = useState<Expense[]>([
-    {
-      id: 1,
-      title: "Videogames",
-      category: "Entertainment",
-      dateAdded: "2017-08-20",
-      amount: 100,
-    },
-  ]);
+  const [expenses] = useState<Expense[]>(initialExpenses);
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible();
 
@@ -33,7 +26,7 @@ function App() {
         isComponentVisible={isComponentVisible}
         setIsComponentVisible={setIsComponentVisible}
       />
-      <SummarySection />
+      <SummarySection expenses={expenses} />
       <MainSection expenses={expenses} />
       {isComponentVisible && (
         <div ref={ref}>
