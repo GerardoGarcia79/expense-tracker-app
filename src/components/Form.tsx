@@ -1,4 +1,9 @@
-const Form = () => {
+interface Props {
+  setIsComponentVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  isComponentVisible: boolean;
+}
+
+const Form = ({ setIsComponentVisible, isComponentVisible }: Props) => {
   return (
     <div className="fixed top-1/3 md:right-[12%] lg:right-1/3 z-10 bg-[#63b3ed] p-7 rounded-md text-xl w-[92%] md:w-3/4 lg:w-[30%]">
       <h1 className="text-3xl font-bold">Add Expense</h1>
@@ -49,7 +54,10 @@ const Form = () => {
         <p className="font-bold mt-2">Amount</p>
         <input type="number" className="p-1 rounded-sm" />
         <div className="mt-3">
-          <button className="border-2 border-red-600 text-red-600 bg-white p-2 rounded-md mr-2 font-bold hover:border-4">
+          <button
+            onClick={() => setIsComponentVisible(!isComponentVisible)}
+            className="border-2 border-red-600 text-red-600 bg-white p-2 rounded-md mr-2 font-bold hover:border-4"
+          >
             Cancel
           </button>
           <button

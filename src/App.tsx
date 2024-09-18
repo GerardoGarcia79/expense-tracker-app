@@ -4,6 +4,7 @@ import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
 import allData from "./data/allExpensesData";
 import { useState } from "react";
 import Form from "./components/Form";
+import useComponentVisible from "./hooks/useComponentVisible";
 ChartJS.register(ArcElement, Legend, Tooltip);
 
 function App() {
@@ -16,12 +17,17 @@ function App() {
       amount: 100,
     },
   ]);
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentVisible();
 
   return (
     <div className="bg-gray-50 min-h-screen	w-full p-5">
       <div className="flex justify-between">
         <h1 className="text-3xl font-bold ">Expense Tracker</h1>
-        <button className="border-2 border-[#63b3ed] text-black text-lg py-1 px-3 rounded-md hover:text-white hover:bg-[#63b3ed]">
+        <button
+          onClick={() => setIsComponentVisible(!isComponentVisible)}
+          className="border-2 border-[#63b3ed] text-black text-lg py-1 px-3 rounded-md hover:text-white hover:bg-[#63b3ed]"
+        >
           Add Expense
         </button>
       </div>
@@ -57,7 +63,10 @@ function App() {
               <p></p>
             </div>
             {expenses.map((expense) => (
-              <div className="p-2 border-b-2 border-gray-300 grid grid-cols-6 gap-2">
+              <div
+                key={expense.id}
+                className="p-2 border-b-2 border-gray-300 grid grid-cols-6 gap-2"
+              >
                 <p className="col-span-2 break-words">{expense.title}</p>
                 <p>{expense.category}</p>
                 <p>{expense.dateAdded}</p>
@@ -76,7 +85,14 @@ function App() {
           <Doughnut data={allData} options={{}} className="" />
         </div>
       </div>
-      <Form />
+      {isComponentVisible && (
+        <div ref={ref}>
+          <Form
+            isComponentVisible={isComponentVisible}
+            setIsComponentVisible={setIsComponentVisible}
+          />
+        </div>
+      )}
     </div>
   );
 }
