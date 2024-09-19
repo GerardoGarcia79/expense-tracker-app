@@ -1,19 +1,62 @@
+import { useRef, useState } from "react";
+import { Expense } from "../App";
+
 interface Props {
   setIsComponentVisible: React.Dispatch<React.SetStateAction<boolean>>;
   isComponentVisible: boolean;
+  expenses: Expense[];
+  addExpense: (newExpense: Expense) => void;
 }
 
-const Form = ({ setIsComponentVisible, isComponentVisible }: Props) => {
+const Form = ({
+  setIsComponentVisible,
+  isComponentVisible,
+  expenses,
+  addExpense,
+}: Props) => {
+  const [category, setCategory] = useState("");
+  const title = useRef<HTMLInputElement>(null);
+  const amount = useRef<HTMLInputElement>(null);
+  const date = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = () => {
+    if (title.current && amount.current && date.current) {
+      addExpense({
+        title: title.current?.value,
+        amount: Number(amount.current?.value),
+        category: category,
+        dateAdded: date.current.value,
+        id: expenses.length + 1,
+      });
+      setCategory("");
+      title.current.value = "";
+      amount.current.value = "";
+      date.current.value = "";
+    }
+  };
+
   return (
     <div className="fixed top-1/3 md:right-[12%] lg:right-1/3 z-10 bg-[#63b3ed] p-7 rounded-md text-xl w-[92%] md:w-3/4 lg:w-[30%]">
       <h1 className="text-3xl font-bold">Add Expense</h1>
-      <form>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      >
         <p className="font-bold mt-2">Title</p>
-        <input type="text" className="p-1 rounded-sm w-full" />
+        <input
+          ref={title}
+          type="text"
+          required
+          autoFocus
+          className="p-1 rounded-sm w-full"
+        />
         <p className="font-bold mt-2">Category</p>
-        <div className="">
+        <div onChange={(e) => setCategory((e.target as Element).id)}>
           <div className="block">
             <input
+              required
               type="radio"
               name="category"
               id="Entertainment"
@@ -26,6 +69,7 @@ const Form = ({ setIsComponentVisible, isComponentVisible }: Props) => {
           </div>
           <div className="block">
             <input
+              required
               type="radio"
               name="category"
               id="Groceries"
@@ -38,6 +82,7 @@ const Form = ({ setIsComponentVisible, isComponentVisible }: Props) => {
           </div>
           <div className="block ">
             <input
+              required
               type="radio"
               name="category"
               id="General"
@@ -50,9 +95,23 @@ const Form = ({ setIsComponentVisible, isComponentVisible }: Props) => {
           </div>
         </div>
         <p className="font-bold mt-2">Date</p>
-        <input type="date" className="p-1 rounded-sm" />
+        <input
+          ref={date}
+          required
+          min="2020-01-01"
+          max="2024-09-19"
+          type="date"
+          className="p-1 rounded-sm"
+        />
         <p className="font-bold mt-2">Amount</p>
-        <input type="number" className="p-1 rounded-sm" />
+        <input
+          ref={amount}
+          type="number"
+          required
+          min="1"
+          max="9999"
+          className="p-1 rounded-sm"
+        />
         <div className="mt-3">
           <button
             onClick={() => setIsComponentVisible(!isComponentVisible)}

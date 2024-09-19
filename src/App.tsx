@@ -24,6 +24,10 @@ function App() {
     setExpenses(expenses.filter((expense) => expense.id !== id));
   };
 
+  const addExpense = (newExpense: Expense) => {
+    setExpenses([newExpense, ...expenses]);
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen	w-full p-5">
       <HeaderSection
@@ -40,6 +44,8 @@ function App() {
           <Form
             isComponentVisible={isComponentVisible}
             setIsComponentVisible={setIsComponentVisible}
+            expenses={expenses}
+            addExpense={addExpense}
           />
         </div>
       )}
