@@ -1,10 +1,10 @@
 import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
+import { Chart as ChartJS, Tooltip, Legend, ArcElement, Title } from "chart.js";
 import allExpensesData from "../data/allExpensesData";
 import { Expense } from "../App";
 import ExpensesList from "./ExpensesList";
 import { useEffect, useState } from "react";
-ChartJS.register(ArcElement, Legend, Tooltip);
+ChartJS.register(ArcElement, Legend, Tooltip, Title);
 
 interface Props {
   expenses: Expense[];
@@ -50,7 +50,16 @@ const MainSection = ({ expenses, deleteExpense }: Props) => {
             data={allExpensesData(
               selectedCategory ? filteredExpenses : expenses
             )}
-            className=""
+            options={{
+              plugins: {
+                title: {
+                  display: true,
+                  text: `${
+                    selectedCategory ? selectedCategory : "All"
+                  } Expenses`,
+                },
+              },
+            }}
           />
         </div>
       </div>
