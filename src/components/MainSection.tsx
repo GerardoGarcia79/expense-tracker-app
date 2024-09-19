@@ -1,6 +1,6 @@
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
-import { allChartData } from "../data/allExpensesData";
+import allExpensesData from "../data/allExpensesData";
 import { Expense } from "../App";
 import ExpensesList from "./ExpensesList";
 import { useEffect, useState } from "react";
@@ -46,7 +46,12 @@ const MainSection = ({ expenses, deleteExpense }: Props) => {
           selectedCategory={selectedCategory}
         />
         <div className="h-72 flex justify-center lg:fixed lg:right-0  2xl:right-24">
-          <Doughnut data={allChartData} options={{}} className="" />
+          <Doughnut
+            data={allExpensesData(
+              selectedCategory ? filteredExpenses : expenses
+            )}
+            className=""
+          />
         </div>
       </div>
     </>

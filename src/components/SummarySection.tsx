@@ -1,8 +1,8 @@
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
-import { allChartData } from "../data/allExpensesData";
 import useCalculateTotal from "../data/useCalculateTotal";
 import { Expense } from "../App";
+import allExpensesData from "../data/allExpensesData";
 ChartJS.register(ArcElement, Legend, Tooltip);
 
 interface Props {
@@ -21,7 +21,7 @@ const SummarySection = ({ expenses }: Props) => {
         </div>
       </div>
       <div className="flex justify-center items-center h-72">
-        <Doughnut data={allChartData} options={{}} className="" />
+        <Doughnut data={allExpensesData(expenses)} options={{}} className="" />
       </div>
     </div>
   );

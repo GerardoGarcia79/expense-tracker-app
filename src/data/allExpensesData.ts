@@ -1,3 +1,4 @@
+import { Expense } from "../App";
 import useRandomColorGenerator from "../hooks/useRandomColorGenerator";
 
 export const initialExpenses = [
@@ -24,19 +25,24 @@ export const initialExpenses = [
   },
 ];
 
+const allExpensesData = (data: Expense[]) => {
+  const bgColors = data.map(() => useRandomColorGenerator());
+  const titles = data.map((expense) => expense.title);
+  const amounts = data.map((expense) => expense.amount);
+
+  return {
+    labels: titles,
+    datasets: [
+      {
+        data: amounts,
+        backgroundColor: bgColors,
+        hoverOffset: 4,
+      },
+    ],
+  };
+};
+
+export default allExpensesData;
+
 // TODO: Change initialExpenses to expenses at the time
 // TODO: Create another data file with filteredExpenses at the time for mainSection chart
-const bgColors = initialExpenses.map(() => useRandomColorGenerator());
-const titles = initialExpenses.map((expense) => expense.title);
-const amounts = initialExpenses.map((expense) => expense.amount);
-
-export const allChartData = {
-  labels: titles,
-  datasets: [
-    {
-      data: amounts,
-      backgroundColor: bgColors,
-      hoverOffset: 4,
-    },
-  ],
-};
