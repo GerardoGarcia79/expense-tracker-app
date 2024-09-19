@@ -48,3 +48,7 @@ export default tseslint.config({
   },
 })
 ```
+
+```
+# You can see the project here:
+https://expense-tracker-app-three-xi.vercel.app/
