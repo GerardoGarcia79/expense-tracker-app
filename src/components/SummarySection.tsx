@@ -1,6 +1,6 @@
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, Tooltip, Legend, ArcElement } from "chart.js";
-import useCalculateTotal from "../data/useCalculateTotal";
+import useCalculateTotal from "../hooks/useCalculateTotal";
 import { Expense } from "../App";
 import allExpensesData from "../data/allExpensesData";
 ChartJS.register(ArcElement, Legend, Tooltip);

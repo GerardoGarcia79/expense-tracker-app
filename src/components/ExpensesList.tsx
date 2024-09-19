@@ -1,5 +1,5 @@
 import { Expense } from "../App";
-import useCalculateTotal from "../data/useCalculateTotal";
+import useCalculateTotal from "../hooks/useCalculateTotal";
 
 interface Props {
   expenses: Expense[];
