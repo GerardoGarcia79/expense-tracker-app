@@ -36,7 +36,7 @@ const Form = ({
   };
 
   return (
-    <div className="fixed top-1/3 md:right-[12%] lg:right-1/3 z-10 bg-[#63b3ed] p-7 rounded-md text-xl w-[92%] md:w-3/4 lg:w-[30%]">
+    <div className="fixed top-1/3 lg:top-1/4 md:right-[12%] lg:right-1/4 xl:right-1/3 z-10 bg-[#63b3ed] p-7 rounded-md text-xl w-[92%] md:w-3/4 lg:w-[50%] xl:w-[40%]">
       <h1 className="text-3xl font-bold">Add Expense</h1>
       <form
         onSubmit={(e) => {

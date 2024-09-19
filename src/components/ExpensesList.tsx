@@ -19,10 +19,10 @@ const ExpensesList = ({
   );
   const expensesList = selectedCategory ? filteredExpenses : expenses;
   return (
-    <div className="col-span-3">
+    <div className="text-sm lg:text-lg md:col-span-3">
       <div className="my-4 w-full">
-        <div className="p-2 border-y-2 border-gray-300 grid grid-cols-6 gap-2">
-          <p className="col-span-2 font-bold">Title</p>
+        <div className="p-2 border-y-2 border-gray-300 grid grid-cols-5 md:grid-cols-6 gap-1">
+          <p className="font-bold md:col-span-2">Title</p>
           <p className="font-bold">Category</p>
           <p className="font-bold">Date Added</p>
           <p className="font-bold">Amount</p>
@@ -31,12 +31,18 @@ const ExpensesList = ({
         {expensesList.map((expense) => (
           <div
             key={expense.id}
-            className="p-2 border-b-2 border-gray-300 grid grid-cols-6 gap-2"
+            className="p-2 border-b-2 border-gray-300 grid grid-cols-5 md:grid-cols-6 gap-1"
           >
-            <p className="col-span-2 break-words">{expense.title}</p>
-            <p className="flex items-center">{expense.category}</p>
-            <p className="flex items-center">{expense.dateAdded}</p>
-            <p className="flex items-center">{expense.amount}</p>
+            <p className="md:col-span-2 break-words">{expense.title}</p>
+            <p className="break-words md:flex md:items-center">
+              {expense.category}
+            </p>
+            <p className="break-words md:flex md:items-center">
+              {expense.dateAdded}
+            </p>
+            <p className="break-words md:flex md:items-center">
+              ${expense.amount}
+            </p>
             <div>
               <button
                 onClick={() => deleteExpense(expense.id)}
