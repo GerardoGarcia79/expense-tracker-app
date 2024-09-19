@@ -24,15 +24,17 @@ export const initialExpenses = [
   },
 ];
 
+// TODO: Change initialExpenses to expenses at the time
+// TODO: Create another data file with filteredExpenses at the time for mainSection chart
 const bgColors = initialExpenses.map(() => useRandomColorGenerator());
-console.log(bgColors);
+const titles = initialExpenses.map((expense) => expense.title);
+const amounts = initialExpenses.map((expense) => expense.amount);
 
 export const allChartData = {
-  labels: ["Red", "Blue", "Yellow"],
+  labels: titles,
   datasets: [
     {
-      label: "My First Dataset",
-      data: [300, 50, 100, 200],
+      data: amounts,
       backgroundColor: bgColors,
       hoverOffset: 4,
     },
